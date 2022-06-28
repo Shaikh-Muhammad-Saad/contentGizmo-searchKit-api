@@ -401,6 +401,10 @@ app.use(
     optionSuccessStatus:200,
   })
 );
+app.use(function (req, res, next) {
+  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+  next();
+});
 // app.use(
 //   cors({
 //     origin: (origin, callback) => callback(null, true),
