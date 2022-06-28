@@ -396,10 +396,17 @@ const app = express();
 
 app.use(
   cors({
-    origin: (origin, callback) => callback(null, true),
-    credentials: true,
+    origin:'*', 
+    credentials:true,            //access-control-allow-credentials:true
+    optionSuccessStatus:200,
   })
 );
+// app.use(
+//   cors({
+//     origin: (origin, callback) => callback(null, true),
+//     credentials: true,
+//   })
+// );
 server.applyMiddleware({ app });
 
 app.listen({ port: 5001 }, () =>
