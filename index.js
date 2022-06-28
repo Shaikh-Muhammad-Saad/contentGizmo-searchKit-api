@@ -394,24 +394,26 @@ const server = new ApolloServer({
 
 const app = express();
 
-app.use(
-  cors({
-    origin:'*', 
-    credentials:true,            //access-control-allow-credentials:true
-    optionSuccessStatus:200,
-  })
-);
-app.use(function (req, res, next) {
-  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
-  next();
-});
+// app.use(
+//   cors({
+//     origin:'*', 
+//     credentials:true,            //access-control-allow-credentials:true
+//     optionSuccessStatus:200,
+//   })
+// );
+// app.use(function (req, res, next) {
+//   res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+//   next();
+// });
 // app.use(
 //   cors({
 //     origin: (origin, callback) => callback(null, true),
 //     credentials: true,
 //   })
 // );
-server.applyMiddleware({ app });
+const corsOptions = { origin: yourOrigin, credentials: true };
+
+server.applyMiddleware({ app ,cors: corsOptions,});
 
 app.listen({ port: 5001 }, () =>
   console.log(`🚀 Server ready at http://localhost:5001${server.graphqlPath}`)
