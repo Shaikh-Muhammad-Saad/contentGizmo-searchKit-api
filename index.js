@@ -6,14 +6,17 @@ const {
   RefinementSelectFacet,
   DateRangeFacet
 } = require('@searchkit/schema')
-
 const dotenv = require('dotenv');
+const cors =  require("cors"); 
 
 dotenv.config();
 
 const por = process.env.DEBUG_MODE;
 console.log(`Your port is ${por}`);
 ////////////////////////
+
+
+
 class CustomFilter {
   excludeOwnFilters = false
 
@@ -390,6 +393,12 @@ const server = new ApolloServer({
 });
 
 const app = express();
+app.use(
+  cors({
+    origin: (origin, callback) => callback(null, true),
+    credentials: true,
+  })
+);
 server.applyMiddleware({ app });
 
 app.listen({ port: 5001 }, () =>
